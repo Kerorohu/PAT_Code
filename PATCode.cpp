@@ -114,65 +114,133 @@ using namespace std;
 //		cout << " " << itc->first << " " << setiosflags(ios::fixed) << setprecision(1) << itc->second;
 //	}
 //}
+//int main() {
+//	int num;
+//	string str = "";
+//	cin >> num;
+//	string* p = new string[num];
+//	for (int i = 0; i < num; i++) {
+//		cin >> str;
+//		p[i] = str;
+//	}
+//	int countap = 0,countpat = 0,countta = 0,countp=0,countt=0;
+//	int seep = 0,seet = 0;
+//	int t = 0;
+//	for (int i = 0; i < num; i++) {
+//		for (int j = 0; j < p[i].size(); j++) {
+//			if (p[i][j] != 'P' && p[i][j] != 'A' && p[i][j] != 'T') {
+//				//cout << "NO" << endl;
+//				t = 1;
+//				break;
+//			}
+//			else
+//			{	//cout << "pij= " << p[i][j] << endl;
+//				if (p[i][j] == 'P') {
+//					seep = 1;
+//					countp++;
+//				}
+//				else if(p[i][j] == 'T')
+//				{
+//					countt++;
+//					if(seep == 1)
+//						seet = 1;
+//				}
+//				if (p[i][j] == 'A' && seep == 0) {
+//					countap++;
+//				}
+//				if (seep == 1 && seet == 0 && p[i][j] == 'A') {
+//					countpat++;
+//				}
+//				if (seep == 1 && seet == 1 && p[i][j] == 'A') {
+//					countta++;
+//				}
+//			}
+//		}
+//		//cout << "ap " << countap << " pat " << countpat << "ta " << countta << endl;
+//		//cout << "countp " << countp << " countt " << countt << endl;
+//		if (countta == countap * countpat && t != 1 && countpat != 0 && countp == 1 && countt == 1) {
+//			cout << "YES" << endl;
+//			//cout << p[i] << endl;
+//		}
+//		else
+//		{
+//			cout << "NO" << endl;
+//			t = 0;
+//		}
+//		countap = 0;
+//		countpat = 0;
+//		countta = 0;
+//		countp = 0;
+//		countt = 0;
+//		seep = 0;
+//		seet = 0;
+//	}
+//}
+//const char* ntohanzi(int);
+//
+//int main() {
+//	string n;
+//	cin >> n;
+//	int num[100];
+//	int cn = 0, sum = 0;
+//	string numstr;
+//	
+//	for (int i = 0; i < n.size(); i++) {
+//		num[i] = n[i] - '0';
+//		//cout << "num= " << num[i] << endl;
+//	}
+//
+//	for (int i = 0; i < n.size(); i++) {
+//		sum += num[i];
+//		//cout << "sum= " << sum << endl;
+//	}
+//	
+//	numstr = to_string(sum);
+//	int size = numstr.size();
+//	//cout << numstr;
+//	string* hanzi = new string[size];
+//	for (int i = 0; i < size; i++) {
+//		//cout << (int)(numstr[i] - '0');
+//		hanzi[i] = ntohanzi((int)(numstr[i] - '0'));
+//		cout << hanzi[i];
+//		if (i < size - 1)
+//			cout << " ";
+//	}
+//
+//
+//}
+//
+//const char* ntohanzi(int num) {
+//	switch (num) {
+//	case 0:
+//		return "ling";
+//	case 1:
+//		return  "yi";
+//	case 2:
+//		return  "er";
+//	case 3:
+//		return  "san";
+//	case 4:
+//		return  "si";
+//	case 5:
+//		return  "wu";
+//	case 6:
+//		return  "liu";
+//	case 7:
+//		return "qi";
+//	case 8:
+//		return "ba";
+//	case 9:
+//		return "jiu";
+//	}
+//}
+
 int main() {
-	int num;
-	string str = "";
-	cin >> num;
-	string* p = new string[num];
-	for (int i = 0; i < num; i++) {
-		cin >> str;
-		p[i] = str;
-	}
-	int countap = 0,countpat = 0,countta = 0,countp=0,countt=0;
-	int seep = 0,seet = 0;
-	int t = 0;
-	for (int i = 0; i < num; i++) {
-		for (int j = 0; j < p[i].size(); j++) {
-			if (p[i][j] != 'P' && p[i][j] != 'A' && p[i][j] != 'T') {
-				//cout << "NO" << endl;
-				t = 1;
-				break;
-			}
-			else
-			{	//cout << "pij= " << p[i][j] << endl;
-				if (p[i][j] == 'P') {
-					seep = 1;
-					countp++;
-				}
-				else if(p[i][j] == 'T')
-				{
-					countt++;
-					if(seep == 1)
-						seet = 1;
-				}
-				if (p[i][j] == 'A' && seep == 0) {
-					countap++;
-				}
-				if (seep == 1 && seet == 0 && p[i][j] == 'A') {
-					countpat++;
-				}
-				if (seep == 1 && seet == 1 && p[i][j] == 'A') {
-					countta++;
-				}
-			}
-		}
-		//cout << "ap " << countap << " pat " << countpat << "ta " << countta << endl;
-		//cout << "countp " << countp << " countt " << countt << endl;
-		if (countta == countap * countpat && t != 1 && countpat != 0 && countp == 1 && countt == 1) {
-			cout << "YES" << endl;
-			//cout << p[i] << endl;
-		}
-		else
-		{
-			cout << "NO" << endl;
-			t = 0;
-		}
-		countap = 0;
-		countpat = 0;
-		countta = 0;
-		countp = 0;
-		countt = 0;
-		seep = 0;
-		seet = 0;
+	int n;
+	long A, B, C;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> A >> B >> C;
+		cout << "Case #" << i+1 << ": " << (A + B > C ? "true" : "false") << endl;
 	}
 }
