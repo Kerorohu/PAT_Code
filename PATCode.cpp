@@ -1,15 +1,115 @@
 ﻿// PATCode.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
+
+//#include <vector>
+//#include <string>
+//#include <sstream>
+//#include <map>
+//#include <iomanip>
+//
+//using namespace std;
+//#include <iostream>
+//int* geass(int*);
+//using namespace std;
+
 #include <iostream>
 #include <vector>
-#include <string>
-#include <sstream>
-#include <map>
-#include <iomanip>
+#include <algorithm>
+
 
 using namespace std;
+void geass(int, vector<int>&);
 
+
+
+int main()
+{
+    
+    int n;
+    cin >> n;
+    int* num = new int[n];
+    
+    for (int i = 0; i < n; i++) {
+        cin >> num[i];
+    }
+    vector<int>* g = new vector<int>[n];
+    //vector<int>* r = new vector<int>[n];
+    for (int i = 0; i < n; i++) {
+        geass(num[i],g[i]);
+    }
+
+
+    int boool = 0,bol = 0;
+    vector<int>::iterator it;
+    vector<int> res;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            for (it = g[j].begin(); it != g[j].end(); it++) {
+                if (*it == num[i])
+                    boool += 1;
+            }
+            if (boool > 0)
+                bol += 1;
+        }
+        if (bol == 0)
+            res.push_back(num[i]);
+        boool = 0;
+        bol = 0;
+    }
+
+    sort(res.rbegin(), res.rend());
+
+    vector<int>::iterator resit;
+    for (resit = res.begin(); resit != res.end(); resit++) {
+        cout << *resit;
+        if(resit != (res.end() - 1))
+            cout << " ";
+    }
+}
+
+void geass(int n, vector<int>&vec) {
+    if (n == 1) {
+       
+    }
+    else if (n % 2 == 0) {
+        n = n / 2;
+        vec.push_back(n);
+        geass(n, vec);
+    }
+    else {     
+        n = (3 * n + 1) / 2;
+        vec.push_back(n);
+        geass(n, vec);
+    }
+    
+}
+
+//int main()
+//{
+//    int n[2];
+//    cin >> n[0];
+//    n[1] = 0;
+//    int* res;
+//    res = geass(n);
+//    cout << *(res+1) << endl;
+//}
+//
+//int* geass(int* n) {
+//    cout << "n= " << n[0] << endl;
+//    cout << "cishu= " << n[1] << endl;
+//    if (n[0] == 1) {
+//        return n;
+//    }
+//    if (n[0] % 2 == 0) {
+//        n[0] = n[0] / 2;
+//    }
+//    else {
+//        n[0] = (3 * n[0] + 1) / 2;
+//    }
+//    n[1]++;
+//    geass(n);
+//}
 //int main()
 //{
 //    int a, b,sum,con,dot,temp;
@@ -235,12 +335,12 @@ using namespace std;
 //	}
 //}
 
-int main() {
-	int n;
-	long A, B, C;
-	cin >> n;
-	for (int i = 0; i < n; i++) {
-		cin >> A >> B >> C;
-		cout << "Case #" << i+1 << ": " << (A + B > C ? "true" : "false") << endl;
-	}
-}
+//int main() {
+//	int n;
+//	long A, B, C;
+//	cin >> n;
+//	for (int i = 0; i < n; i++) {
+//		cin >> A >> B >> C;
+//		cout << "Case #" << i+1 << ": " << (A + B > C ? "true" : "false") << endl;
+//	}
+//}
