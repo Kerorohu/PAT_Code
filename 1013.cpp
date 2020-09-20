@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -7,25 +7,18 @@ int main() {
 	vector<int> v;
 	v.push_back(2);
 	int n = 3;
-	for (int i = v.size(); i < 1000;) {
+	for (int i = v.size(); i < 10000;) {
 		if (issushu(n))
 			v.push_back(n);
 		i = v.size();
-		n+=2;
 	}
 	int a, b;
 	cin >> a >> b;
 	vector<int>::iterator it;
-	int js = 0;
 	for (it = v.begin() + a - 1; it != v.begin() + b; it++) {
 		cout << *it;
-		js++;
-		if (js % 10 == 0)
-			cout << endl;
-		else if (it != v.begin() + b - 1)
-		{
+		if (it != v.begin() + b - 1)
 			cout << " ";
-		}
 	}
 }
 
