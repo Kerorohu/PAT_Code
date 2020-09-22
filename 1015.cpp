@@ -1,4 +1,4 @@
-﻿#include<iostream>
+#include<iostream>
 #include<string>
 #include <map>
 #include <vector>
@@ -15,10 +15,10 @@ map<string, int> dscore;
 int main() {
 	int n, l, h;
 	cin >> n >> l >> h;
-	
+
 	map<string, int> cscore;
 	string enums;
-	int ds, cs, tp,sum;
+	int ds, cs, tp, sum;
 	dscore.clear();
 	sum = 0;
 	vector<pair<string, int>> vall, vdsc, vcdjw, vs;
@@ -27,19 +27,19 @@ int main() {
 		dscore.insert(pair<string, int>(enums, ds));
 		cscore.insert(pair<string, int>(enums, cs));
 		tp = ds + cs;
-		if (ds >= h && cs >= h){
+		if (ds >= h && cs >= h) {
 			vall.push_back(pair<string, int>(enums, tp));
 			sum++;
 		}
-		else if(ds >= h && cs >= l){
+		else if (ds >= h && cs >= l) {
 			vdsc.push_back(pair<string, int>(enums, tp));
 			sum++;
 		}
-		else if(ds >= cs && ds >= l && cs >= l){
+		else if (ds >= cs && ds >= l && cs >= l) {
 			vcdjw.push_back(pair<string, int>(enums, tp));
 			sum++;
 		}
-		else if(ds >= l && cs >= l){
+		else if (ds >= l && cs >= l) {
 			vs.push_back(pair<string, int>(enums, tp));
 			sum++;
 		}
@@ -55,7 +55,7 @@ int main() {
 	vall.insert(vall.end(), vdsc.begin(), vdsc.end());
 	vall.insert(vall.end(), vcdjw.begin(), vcdjw.end());
 	vall.insert(vall.end(), vs.begin(), vs.end());
-	
+
 	vector<pair<string, int>>::iterator itv;
 
 	cout << sum << endl;
@@ -66,7 +66,7 @@ int main() {
 }
 
 bool cmp(pair<string, int> a, pair<string, int> b) {
-	if(a.second == b.second){
+	if (a.second == b.second) {
 		if (dscore[a.first] == dscore[b.first])
 			return a.first < b.first;
 		return dscore[a.first] > dscore[b.first];
