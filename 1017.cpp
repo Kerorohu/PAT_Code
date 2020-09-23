@@ -1,4 +1,3 @@
-﻿
 #include <iostream>
 #include <string>
 using namespace std;
@@ -16,18 +15,14 @@ int main() {
 pair<string, int> chufa(string s, int a) {
 	string temp = "";
 	string jisuan, temps, tempr;
-	int num, shang, yu;
-	yu = 0;
+	int num, shang ,yu;
 	for (int i = 0; i < s.size(); i++) {
-		jisuan = to_string(yu) + s[i];
+		jisuan = yu + s[i];
 		num = stoi(jisuan);
 		shang = num / a;
 		yu = num - shang * a;
-		tempr = to_string(shang);
-		temps.append(tempr);
+		temps.push_back(to_string(shang));
 	}
-	if (temps.size() > 1 && temps[0] == '0')
-		temps.erase(temps.begin());
 
 	return pair<string, int>(temps, yu);
 }
