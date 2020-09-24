@@ -1,33 +1,60 @@
-﻿
-#include <iostream>
-#include <string>
+﻿#include<iostream>
+#include<string>
+#include<algorithm>
+#include<iomanip>
+
 using namespace std;
-pair<string, int> chufa(string, int);
+bool cmps(char a, char b);
+bool cmpd(char a, char b);
 
 int main() {
-	string str;
-	int num;
-	cin >> str >> num;
-	pair<string, int> p;
-	p = chufa(str, num);
-	cout << p.first << " " << p.second;
+	int st;
+	string s,sta,stb,stp;
+	cin >> st;
+	s = to_string(st);
+	int ssize = s.size();
+	if (ssize < 4) {
+		for (int i = 0; i < 4 - ssize; i++) {
+
+			s = "0" + s;
+			//cout << "stp = " << stp << endl;
+		}
+	}
+
+	int a, b ,temp;
+	temp = 0;
+
+	while(temp != 6174){
+		sort(s.begin(), s.end(), cmps);
+		//sta = s;
+		a = stoi(s);
+		sort(s.begin(), s.end(), cmpd);
+		//stb = s;
+		b = stoi(s);
+		temp = a - b;
+		stp = to_string(temp);
+		
+		int stpsize = stp.size();
+		if (stpsize < 4) {
+			for (int i = 0; i < 4 - stpsize; i++) {
+				
+				stp = "0" + stp;
+				//cout << "stp = " << stp << endl;
+			}
+		}
+
+		//cout << sta << " - " << stb << " = " << stp << endl;
+		cout << setw(4) << setfill('0') << a << " - " << setw(4) << setfill('0') << b << " = " << setw(4) << setfill('0') << temp << endl;
+		if (temp == 0)
+			break;
+		s = stp;
+	}
 }
 
-pair<string, int> chufa(string s, int a) {
-	string temp = "";
-	string jisuan, temps, tempr;
-	int num, shang, yu;
-	yu = 0;
-	for (int i = 0; i < s.size(); i++) {
-		jisuan = to_string(yu) + s[i];
-		num = stoi(jisuan);
-		shang = num / a;
-		yu = num - shang * a;
-		tempr = to_string(shang);
-		temps.append(tempr);
-	}
-	if (temps.size() > 1 && temps[0] == '0')
-		temps.erase(temps.begin());
+bool cmps(char a, char b) {
+	return a > b;
+}
 
-	return pair<string, int>(temps, yu);
+bool cmpd(char a, char b) {
+	return a < b;
 }
