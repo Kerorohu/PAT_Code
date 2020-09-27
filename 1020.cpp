@@ -2,51 +2,56 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <vector>
+#include <iomanip>
+
 using namespace std;
-bool cmp(int a, int b);
+
+bool cmp(pair<float, float> a, pair<float, float> b);
+
 int main() {
-	int zhonglei, zuidaxuqiu,zuidashouyi,yuebingshuliang;
-	int* kucun = new int[zhonglei];
-	int* zongshoujia = new int[zhonglei];
-	int* danjia = new int[zhonglei];
-	vector<pair<int, int>> kczsj;
-	
-	yuebingshuliang = 0;
+	int zhonglei, zuidaxuqiu;
 	cin >> zhonglei >> zuidaxuqiu;
+	float* kucun = new float[zhonglei];
+	float* zongshoujia = new float[zhonglei];
+	float* danjia = new float[zhonglei];
+	vector<pair<float, float>> kczsj;
+	float zuidashouyi, yuebingshuliang;
+	yuebingshuliang = 0;
+
 
 	for (int i = 0; i < zhonglei; i++) {
 		cin >> kucun[i];
 	}
 	for (int i = 0; i < zhonglei; i++) {
 		cin >> zongshoujia[i];
-		danjia[i] = (zongshoujia[i] * 1000) / kucun;
-		kczsj.push_back(pair<int, int>(kucun[i], danjia[i]));
+		danjia[i] = (zongshoujia[i] * 10000) / kucun[i];
+		kczsj.push_back(pair<float, float>(kucun[i], danjia[i]));
 	}
 
-	sort(kczsj.begin(), kczsj.end(),cmp);
-	int n = 0;
+	sort(kczsj.begin(), kczsj.end(), cmp);
+	float n = 0;
 	zuidashouyi = 0;
-	vector<pair<int, int>>::iterator it;
+	vector<pair<float, float>>::iterator it;
 	it = kczsj.begin();
 
-	while (yuebingshuliang < zuidaxuqiu) {
-		n = (zuidaxuqiu - yuebingshuliang) / *it->second;
-		
+	while (yuebingshuliang < zuidaxuqiu && it != kczsj.end()) {
+
+		//cout << "it.second= " << (*it).second;
+		n = (*it).first;
+
 		if (n > (zuidaxuqiu - yuebingshuliang))
 		{
 			n = zuidaxuqiu - yuebingshuliang;
-		}else if (n > (*it->first)){
-			n = (*it->first);
 		}
-		zuidashouyi += n * (* it->second);
+
+		zuidashouyi += n * (*it).second * 10000;
 		yuebingshuliang += n;
 		it++;
 	}
-
-	cout << yuebingshuliang;
+	//setiosflags(ios::fixed);
+	cout << fixed << setprecision(2) << zuidashouyi / 1e+08;
 }
 
-bool cmp(pair<int,int> a ,pair<int,int> b) {
-	return a.second > b.second;
+bool cmp(pair<float, float> a, pair<float, float> b) {
+	return a.second >= b.second;
 }
