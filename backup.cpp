@@ -344,6 +344,210 @@
 //		cout << "Case #" << i+1 << ": " << (A + B > C ? "true" : "false") << endl;
 //	}
 //}
+//1023
+
+//1024
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <iomanip>
+
+using namespace std;
+
+int main() {
+	string s;
+	cin >> s;
+	char st1 = s[0];
+	char st2 = s[s.find('E') + 1];
+	string s1 = s.substr(1, s.find('E') - 1);
+	string s2 = s.substr(s.find('E') + 2, s.size() - s.find('E'));
+	string sub = s.substr(s.find('.') + 1, s.find('E') - s.find('.') - 1);
+	float num;
+	string res;
+	int z;
+	int lensub = sub.size();
+	if (st1 == '-')
+		cout << '-';
+	num = stof(s1);
+	z = stoi(s2);
+	int c = 0, d = 0;
+	for (int i = s1.size() - 1; i >= 0; i--) {
+		if (s1[i] == '0') {
+			c++;
+		}
+		else
+		{
+			break;
+		}
+	}
+	/*cout << s1 << endl;
+	cout << "c= " << c << endl;*/
+
+	if (st2 == '-') {
+		for (int i = 0; i < z; i++) {
+			num *= 0.1;
+		}
+
+		res = to_string(num);
+		if (res[res.size() - 1] = '0') {
+			for (int i = res.size() - 1; i >= 0; i--) {
+				if (res[i] == '0') {
+					d++;
+				}
+				else
+				{
+					break;
+				}
+			}
+			res.erase(res.size() - d);
+		}
+
+
+
+		cout << "res = " << res << endl;
+		for (int i = 0; i < c; i++) {
+			res.push_back('0');
+		}
+		cout << res;
+	}
+	else
+	{
+		for (int i = 0; i < z; i++) {
+			num *= 10;
+		}
+
+		if (lensub > z) {
+			cout << fixed << setprecision(lensub - z) << num;
+		}
+		else
+		{
+			cout << fixed << setprecision(0) << num;
+		}
+		/*for (int i = 0; i < z; i++) {
+			num *= 10;
+		}
+		cout << fixed << num;*/
+	}
+}
+
+//1025
+#include <iostream>
+#include <algorithm>
+#include <map>
+
+using namespace std;
+
+struct Node
+{
+	int add, data, next;
+}node[100000];
+
+int main() {
+	map<int, Node> m;
+	int start, num, k, str;
+	cin >> start >> num >> k;
+	for (int i = 0; i < num; i++) {
+		cin >> str;
+		cin >> m[str].data >> m[str].next;
+	}
+
+	for (int i = 0; i < num; i++) {
+		node[i] = { start,m[start].data,0 };
+		start = m[start].next;
+		if (start == -1)     //当start被赋值为-1的时候，链表就结束了，更新n的值，测试点6中并不是所有节点都是有效的链表节点
+			num = i + 1;
+		if ((i + 1) % k == 0) {
+			reverse(node + i + 1 - k, node + i + 1);
+		}
+
+	}
+
+	for (int i = 0; i < num; i++) {
+		printf("%05d %d ", node[i].add, node[i].data);
+		if (i < num - 1) {
+			printf("%05d\n", node[i + 1].add);
+		}
+		else
+		{
+			printf("-1");
+		}
+	}
+}
+
+//1026
+#include <iostream>
+#include <math.h>
+constexpr auto CLK_TCK = 100;
+using namespace std;
+
+int main() {
+	long double c1, c2;
+	cin >> c1 >> c2;
+	int time = round((c2 - c1) / CLK_TCK);
+	int hour, min, sec;
+	sec = time % 60;
+	min = (time / 60) % 60;
+	hour = time / 3600;
+	printf("%02d:", hour);
+	printf("%02d:", min);
+	printf("%02d", sec);
+}
+
+#include<iostream>
+#include<string>
+#include<map>
+
+using namespace std;
+
+int main() {
+	int temp;
+	map<int, int> m;
+	for (int i = 0; i < 10; i++) {
+		cin >> temp;
+		m.insert(pair<int, int>(i, temp));
+	}
+	map<int, int>::iterator it;
+	it = m.find(1);
+	for (; it != m.end(); it++) {
+		if (it->second != 0) {
+			cout << it->first;
+			it->second -= 1;
+			break;
+		}
+	}
+
+	for (it = m.begin(); it != m.end(); it++) {
+		while (it->second != 0)
+		{
+			cout << it->first;
+			it->second -= 1;
+		}
+	}
+}
+
+//1022
+int main() {
+	int a, b, d;
+	cin >> a >> b >> d;
+	int sum = a + b;
+	int temp;
+	vector<int> v;
+	while (sum > d)
+	{
+		temp = sum % d;
+		v.push_back(temp);
+		sum = sum / d;
+	}
+	v.push_back(sum);
+
+	vector<int>::iterator it;
+	for (it = v.end() - 1; it != v.begin(); --it) {
+		cout << *it;
+	}
+
+	cout << *(v.begin());
+	system("pause");
+}
 
 //1021
 #include<iostream>
