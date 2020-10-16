@@ -540,6 +540,135 @@ int main() {
 	}
 
 }
+//1037
+#include <iostream>
+#include <string>
+using namespace std;
+struct Money
+{
+	long galleon;
+	int sickle, kunt;
+}pay, need;
+
+int main() {
+	string spay, sneed;
+	cin >> sneed;
+	cin >> spay;
+	need.galleon = stoi(sneed.substr(0, sneed.find('.')));
+	need.sickle = stoi(sneed.substr(sneed.find('.') + 1, sneed.find('.', sneed.find('.') + 1) - sneed.find('.') - 1));
+	//cout << sneed.substr(sneed.rfind('.')) << endl;
+	need.kunt = stoi(sneed.substr(sneed.rfind('.') + 1));
+
+	pay.galleon = stoi(spay.substr(0, spay.find('.')));
+	pay.sickle = stoi(spay.substr(spay.find('.') + 1, spay.find('.', spay.find('.') + 1) - spay.find('.') - 1));
+	pay.kunt = stoi(spay.substr(spay.rfind('.') + 1));
+
+	Money res;
+	long sumn = need.galleon * 17 * 29 + need.sickle * 29 + need.kunt;
+	long sump = pay.galleon * 17 * 29 + pay.sickle * 29 + pay.kunt;
+	long sumr = sump - sumn;
+
+	res.galleon = sumr / (17 * 29);
+	res.sickle = (sumr % (17 * 29)) / 29;
+	res.kunt = sumr % 29;
+
+	if (sumr >= 0) {
+		cout << res.galleon << "." << res.sickle << "." << res.kunt;
+	}
+	else
+	{
+		cout << "-" << -res.galleon << "." << -res.sickle << "." << -res.kunt;
+	}
+	//cout << "galleon = " << need.galleon << " sickle = " << need.sickle << " kunt = " << need.kunt;
+}
+//1039
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+	string get, want;
+	cin >> get >> want;
+
+	int temp = 1;
+
+	for (int i = 0; i < want.size();) {
+		if (get.find(want[i]) == string::npos) {
+			temp = 0;
+			i++;
+		}
+		else
+		{
+			get.erase(get.find(want[i]), 1);
+			want.erase(i, 1);
+		}
+	}
+
+	if (temp == 1) {
+		cout << "Yes " << get.size();
+	}
+	else
+	{
+		cout << "No " << want.size();
+	}
+}
+
+//1038#include <iostream>
+#include <map>
+
+using namespace std;
+
+int main() {
+	int num, score, q, qs;
+	scanf("%d", &num);
+	map<int, int> m;
+	for (int i = 0; i < num; i++) {
+		scanf("%d", &score);
+		m[score]++;
+	}
+	scanf("%d", &q);
+	for (int i = 0; i < q; i++) {
+		scanf("%d", &qs);
+		printf("%d", m[qs]);
+		if (i < q - 1) {
+			cout << " ";
+		}
+	}
+}
+
+//1036
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int main() {
+	float n;
+	char c;
+	cin >> n >> c;
+	int half = round(n / 2);
+
+	for (int i = 0; i < n; i++) {
+		cout << c;
+	}
+	cout << endl;
+
+	for (int i = 0; i < half - 2; i++) {
+		for (int j = 0; j < n; j++) {
+			if (j == 0 || j == n - 1)
+				cout << c;
+			else
+			{
+				cout << " ";
+			}
+		}
+		cout << endl;
+	}
+	for (int i = 0; i < n; i++) {
+		cout << c;
+	}
+}
 
 //1025
 #include <iostream>
