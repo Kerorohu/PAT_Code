@@ -581,6 +581,106 @@ int main() {
 	}
 	//cout << "galleon = " << need.galleon << " sickle = " << need.sickle << " kunt = " << need.kunt;
 }
+//1045
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int main() {
+	int num, temp;
+	cin >> num;
+	long* a = new long[num];
+	long* x = new long[num];
+	long* n = new long[num];
+	long* res = new long[num];
+
+	for (int i = 0; i < num; i++) {
+		cin >> temp;
+		a[i] = temp;
+	}
+
+	long max = 0, min = 10000000000;
+	for (int i = 0; i < num; i++) {
+		if (a[i] > max) {
+			max = a[i];
+		}
+		x[i] = max;
+	}
+
+	for (int i = num - 1; i >= 0; i--) {
+		if (a[i] < min) {
+			min = a[i];
+		}
+		n[i] = min;
+	}
+
+	int cn = 0;
+	for (int i = 0; i < num; i++) {
+		if (n[i] == a[i] && x[i] == a[i]) {
+			res[cn] = a[i];
+			cn++;
+		}
+	}
+	if (cn == 0) {
+		printf("0\n\n");
+	}
+	else {
+		printf("%d\n", cn);
+		for (int i = 0; i < cn; i++) {
+			printf("%ld", res[i]);
+			if (i < cn - 1)
+				printf(" ");
+		}
+	}
+}
+
+//1044
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+	string str;
+	cin >> str;
+	int a[6];
+	a[0] = count(str.begin(), str.end(), 'P');
+	a[1] = count(str.begin(), str.end(), 'A');
+	a[2] = count(str.begin(), str.end(), 'T');
+	a[3] = count(str.begin(), str.end(), 'e');
+	a[4] = count(str.begin(), str.end(), 's');
+	a[5] = count(str.begin(), str.end(), 't');
+
+	while (a[0] != 0 || a[1] != 0 || a[2] != 0 || a[3] != 0 || a[4] != 0 || a[5] != 0) {
+		if (a[0] != 0) {
+			cout << "P";
+			a[0]--;
+		}
+		if (a[1] != 0) {
+			cout << "A";
+			a[1]--;
+		}
+		if (a[2] != 0) {
+			cout << "T";
+			a[2]--;
+		}
+		if (a[3] != 0) {
+			cout << "e";
+			a[3]--;
+		}
+		if (a[4] != 0) {
+			cout << "s";
+			a[4]--;
+		}
+		if (a[5] != 0) {
+			cout << "t";
+			a[5]--;
+		}
+	}
+}
 //1039
 #include <iostream>
 #include <string>
