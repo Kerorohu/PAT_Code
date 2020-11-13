@@ -1,103 +1,80 @@
-#include <iostream>
-#include <map>
-#include <string>
-#include <vector>
-
+#include<iostream>
+#include<string>
+#include<vector>
+#include<map>
 
 using namespace std;
 
-struct Pro
+struct Topic
 {
-	int score, num, rnum;
-	string rstr;
-}temp;
+	int score, option, rightOption;
+	vector<int> ans;
+}topic;
 
 int main() {
 	int N, M;
 	cin >> N >> M;
-	map<int, Pro> m;
-	string stemp;
-	for (int i = 0; i < M; i++) {
-		cin >> temp.score >> temp.num >> temp.rnum;
-		getline(cin, temp.rstr);
-		temp.rstr.erase(0, 1);
-		m.insert(pair<int, Pro>(i, temp));
-	}
-	int c, j, b;
-	string stp;
-	int* sc = new int[M];
-	int* stu = new int[N];
+	vector<Topic> v;
+	int temp, sum = 0, ti;
+	string str;
+	map<int, int> m[M];
 	for (size_t i = 0; i < M; i++)
 	{
-		sc[i] = 0;
+		cin >> topic.score >> topic.option >> topic.rightOption;
+		for (size_t j = 0; j < topic.rightOption; j++)
+		{
+			cin >> temp;
+			topic.ans.push_back(temp);
+		}
+		v.push_back(topic);
 	}
-
+	vector<int> stuAns;
+	int counts, c;
 	for (size_t i = 0; i < N; i++)
 	{
-		stu[i] = 0;
-	}
-
-	for (int i = 0; i < N; i++) {
-		getline(cin, stemp);
-		c = 0; j = 0; b = 0; stp = "";
-		while (c < M)
+		getline(cin, str);
+		counts = 0;
+		c = 0;
+		sum = 0;
+		vector<int> tempi;
+		for (size_t j = 0; j < str.size(); j++)
 		{
-			if (stemp[j] == ')') {
-				b = 0;
+			if (str[j] <= '9' && str[j] >= '0') {
+				counts = str[j] - '0';
+			}
+			if (str[j] == '(') {
 				c++;
-				if (stp != m[c - 1].rstr)
-					sc[c - 1]++;
-				else
-				{
-					stu[i] = stu[i] + m[c - 1].score;
+			}
+			if (str[j] <= 'z' && str[j] >= 'a') {
+				stuAns.push_back(str[j]);
+				counts--;
+				if (counts == 0) {
+					tempi = v[c - 1].ans;
+					ti = 0;
+					for (size_t k = 0; k < stuAns.size(); k++)
+					{
+						if (find(tempi.begin(), tempi.end(), stuAns[i]) != tempi.end()) {
+							tempi.erase(find(tempi.begin(), tempi.end(), stuAns[i]));
+						}
+						else
+						{
+
+							ti = 0;
+							break;
+						}
+
+					}
+					if (tempi.size() == 0) {
+						ti = v[c - 1].score;
+					}
+					else
+					{
+						ti = v[c - 1].score / 2;
+					}
+					sum += ti;
 				}
-				stp = "";
 			}
-
-			if (b == 1) {
-				stp += stemp[j];
-			}
-
-			if (stemp[j] == '(') {
-				j = j + 2;
-				b = 1;
-			}
-			j++;
 		}
-	}
-
-	int max = 0;
-	vector<int> v;
-	for (size_t i = 0; i < M; i++)
-	{
-		if (sc[i] > max)
-			max = sc[i];
-	}
-
-	for (size_t i = 0; i < M; i++)
-	{
-		if (sc[i] == max)
-			v.push_back(i);
-	}
-
-	for (size_t i = 0; i < N; i++)
-	{
-		cout << stu[i] << endl;
-	}
-
-	if (max != 0) {
-		cout << max << " ";
-
-		vector<int>::iterator it;
-		for (it = v.begin(); it != v.end(); it++)
-		{
-			cout << *it + 1;
-			if (it != v.end() - 1)
-				cout << " ";
-		}
-	}
-	else
-	{
-		cout << "Too simple";
+		cout << sun << endl;
 	}
 }
